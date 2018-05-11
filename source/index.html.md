@@ -98,7 +98,7 @@ var options = {
      "fee_type":"HKD",
      "total_fee":"150",
      "open_id":"o3OAhO5yVZ7xAakJ3c5e13OAhO-M",
-     "trade_type":"JSAPI"
+     "trade_type":"NATIVE"
    },
   json: true
 };
