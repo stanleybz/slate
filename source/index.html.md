@@ -93,6 +93,7 @@ var options = {
    },
   body:
    {
+     "notify_url":"http://api.pay.wemine.net/notify_url",
      "out_trade_no":"9900000000",
      "body":"Demo Order",
      "fee_type":"HKD",
@@ -139,6 +140,7 @@ Then you will retrieve a `wexin://xxx` deeplink for your customer to pay their o
 | total_fee | A fee in *cents* | int | - |
 | open_id | Payment user openid, need to linked with the official account | string | - |
 | trade_type | Order intergration method | string | NATIVE |
+| notify_url | Notify URL for forwarding the XML response from wechat | string | - |
 
 ## Check Payment Status
 
