@@ -317,12 +317,13 @@ Remember not to show any of you credentials on publicly accessible areas such cl
    <span class="p">},</span>
   <span class="na">body</span><span class="p">:</span>
    <span class="p">{</span>
+     <span class="s2">"notify_url"</span><span class="p">:</span><span class="s2">"http://api.pay.wemine.net/notify_url"</span><span class="p">,</span>
      <span class="s2">"out_trade_no"</span><span class="p">:</span><span class="s2">"9900000000"</span><span class="p">,</span>
      <span class="s2">"body"</span><span class="p">:</span><span class="s2">"Demo Order"</span><span class="p">,</span>
      <span class="s2">"fee_type"</span><span class="p">:</span><span class="s2">"HKD"</span><span class="p">,</span>
      <span class="s2">"total_fee"</span><span class="p">:</span><span class="s2">"150"</span><span class="p">,</span>
      <span class="s2">"open_id"</span><span class="p">:</span><span class="s2">"o3OAhO5yVZ7xAakJ3c5e13OAhO-M"</span><span class="p">,</span>
-     <span class="s2">"trade_type"</span><span class="p">:</span><span class="s2">"JSAPI"</span>
+     <span class="s2">"trade_type"</span><span class="p">:</span><span class="s2">"NATIVE"</span>
    <span class="p">},</span>
   <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
 <span class="p">};</span>
@@ -392,6 +393,12 @@ Then you will retrieve a <code>wexin://xxx</code> deeplink for your customer to 
 <td>Order intergration method</td>
 <td>string</td>
 <td>NATIVE</td>
+</tr>
+<tr>
+<td>notify_url</td>
+<td>Notify URL for forwarding the XML response from wechat</td>
+<td>string</td>
+<td>-</td>
 </tr>
 </tbody></table>
 <h2 id='check-payment-status'>Check Payment Status</h2>
