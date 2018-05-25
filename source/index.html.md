@@ -96,10 +96,9 @@ var options = {
      "notify_url":"http://api.pay.wemine.net/notify_url",
      "out_trade_no":"9900000000",
      "body":"Demo Order",
-     "fee_type":"HKD",
      "total_fee":"150",
      "open_id":"o3OAhO5yVZ7xAakJ3c5e13OAhO-M",
-     "trade_type":"NATIVE"
+     "trade_type":"JSAPI"
    },
   json: true
 };
@@ -121,6 +120,21 @@ request(options, function (error, response, body) {
         "out_trade_no": "9900000000"
     }
 }
+{
+    "status": "success",
+    "data": {
+        "prepay_id": "wx241454271591128cfc753dab0139979466",
+        "out_trade_no": "9900000000",
+        "jsapi": {
+          "appId": "wx25d3f820547bcb2b",
+          "timeStamp": 1527135717,
+          "nonceStr": "Yyj389AvflUTLi8vcSb04uUzVbFjINnw",
+          "package": "prepay_id=wx241221577529528cfc753dab1804175993",
+          "signType": "MD5",
+          "paySign": "8C2B3EF54C5BF3E920DCCC2937571D00"
+        }
+    }
+}
 ```
 
 ### HTTP Request
@@ -132,15 +146,14 @@ Then you will retrieve a `wexin://xxx` deeplink for your customer to pay their o
 
 ### <span class="remark black">RB</span> Request Body
 
-| Key | Description | Type | Options |
-|----|----|----|----|
-| out_trade_no | Order number, must be unique | integer | - |
-| body | Your order description, will show on the payment page | string | - |
-| fee_type | 3-letter ISO code for currency | string | HKD |
-| total_fee | A fee in *cents* | int | - |
-| open_id | Payment user openid, need to linked with the official account | string | - |
-| trade_type | Order intergration method | string | NATIVE |
-| notify_url | Notify URL for forwarding the XML response from wechat | string | - |
+| Key | Description | Type | Options | Required |
+|----|----|----|----|----|
+| out_trade_no | Order number, must be unique | integer | - | Required |
+| body | Your order description, will show on the payment page | string | - | Required |
+| total_fee | A fee in *cents* *(USD)* | int | - | Required |
+| open_id | Payment user openid, need to linked with the official account | string | - | Required when trade_type is JSAPI |
+| trade_type | Order intergration method | string | NATIVE, JSAPI | Required |
+| notify_url | Notify URL for forwarding the XML response from wechat | string | - | Optional |
 
 ## Check Payment Status
 
@@ -204,6 +217,75 @@ You can check you order status by passing the our_trade_no.
 
 ### <span class="remark">QS</span> Query String
 
-| Key | Description | Type | Options |
-|----|----|----|----|
-| out_trade_no | Order number | integer | - |
+| Key | Description | Type | Options | Required |
+|----|----|----|----|----|
+| out_trade_no | Order number | integer | - | Required |
+
+## Check Callback Sign
+
+<span class="badge orange">SECRET</span>
+
+```javascript
+var request = require("request");
+
+var options = {
+  method: 'POST',
+  url: 'https://api.pay.wemine.net/v1/checksign',
+  body: '<xml>
+   <appid><![CDATA[wx2421b1c4370ec43b]]></appid>
+   <attach><![CDATA[支付测试]]></attach>
+   <bank_type><![CDATA[CFT]]></bank_type>
+   <fee_type><![CDATA[CNY]]></fee_type>
+   <is_subscribe><![CDATA[Y]]></is_subscribe>
+   <mch_id><![CDATA[10000100]]></mch_id>
+   <nonce_str><![CDATA[5d2b6c2a8db53831f7eda20af46e531c]]></nonce_str>
+   <openid><![CDATA[oUpF8uMEb4qRXf22hE3X68TekukE]]></openid>
+   <out_trade_no><![CDATA[1409811653]]></out_trade_no>
+   <result_code><![CDATA[SUCCESS]]></result_code>
+   <return_code><![CDATA[SUCCESS]]></return_code>
+   <sign><![CDATA[B552ED6B279343CB493C5DD0D78AB241]]></sign>
+   <sub_mch_id><![CDATA[10000100]]></sub_mch_id>
+   <time_end><![CDATA[20140903131540]]></time_end>
+   <total_fee>1</total_fee>
+   <trade_type><![CDATA[JSAPI]]></trade_type>
+   <transaction_id><![CDATA[1004400740201409030005092168]]></transaction_id>
+</xml>',
+  headers:
+   {
+     'Cache-Control': 'no-cache',
+     'api-key': 'YOUR_API_KEY',
+     'api-secret': 'YOU_API_SECRET'
+     'Content-Type': 'application/xml'
+   }
+  xml: true
+};
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+  console.log(body);
+});
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "status": "success",
+    "data": {
+        "sign": "A1E38D5C4BF8A43FA8E57F2CB4284C9F"
+    }
+}
+```
+
+### HTTP Request
+
+You can check you callback from notify_url if the sign is correct.
+
+`[POST] /checksign`
+
+### <span class="remark">Body</span> Body String
+
+| Content | Description | Type | Required |
+|----|----|----|----|----|
+| XML body from the callback URL | To check if the callback body has correct XML | application/xml | Required |
