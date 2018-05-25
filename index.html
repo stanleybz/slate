@@ -244,6 +244,9 @@
                   <li>
                     <a href="#check-payment-status" class="toc-h2 toc-link" data-title="check-payment-status">Check Payment Status</a>
                   </li>
+                  <li>
+                    <a href="#check-callback-sign" class="toc-h2 toc-link" data-title="check-callback-sign">Check CallBack Sign</a>
+                  </li>
               </ul>
           </li>
       </div>
@@ -320,9 +323,7 @@ Remember not to show any of you credentials on publicly accessible areas such cl
      <span class="s2">"notify_url"</span><span class="p">:</span><span class="s2">"http://api.pay.wemine.net/notify_url"</span><span class="p">,</span>
      <span class="s2">"out_trade_no"</span><span class="p">:</span><span class="s2">"9900000000"</span><span class="p">,</span>
      <span class="s2">"body"</span><span class="p">:</span><span class="s2">"Demo Order"</span><span class="p">,</span>
-     <span class="s2">"fee_type"</span><span class="p">:</span><span class="s2">"HKD"</span><span class="p">,</span>
      <span class="s2">"total_fee"</span><span class="p">:</span><span class="s2">"150"</span><span class="p">,</span>
-     <span class="s2">"open_id"</span><span class="p">:</span><span class="s2">"o3OAhO5yVZ7xAakJ3c5e13OAhO-M"</span><span class="p">,</span>
      <span class="s2">"trade_type"</span><span class="p">:</span><span class="s2">"NATIVE"</span>
    <span class="p">},</span>
   <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
@@ -344,6 +345,22 @@ Remember not to show any of you credentials on publicly accessible areas such cl
         </span><span class="s2">"out_trade_no"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9900000000"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"prepay_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wx241454271591128cfc753dab0139979466"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"out_trade_no"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9900000000"</span><span class="w">
+    </span><span class="p">}</span><span class="p">,</span><span class="w"></span>
+    <span class="s2">"jsapi"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"appId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wx25d3f820547bcb2b"</span><span class="p">,
+        </span><span class="s2">"timeStamp"</span><span class="p">:</span><span class="w"> </span><span class="s2">1527135717</span><span class="p">,
+        </span><span class="s2">"nonceStr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yyj389AvflUTLi8vcSb04uUzVbFjINnw"</span><span class="p">,
+        </span><span class="s2">"package"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prepay_id=wx241221577529528cfc753dab1804175993"</span><span class="p">,
+        </span><span class="s2">"signType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MD5"</span><span class="p">,
+        </span><span class="s2">"paySign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8C2B3EF54C5BF3E920DCCC2937571D00"</span>
+    <span class="p">}</span><span class="w"></span>
+</span><span class="p">}</span><span class="w">
 </span></code></pre><h3 id='http-request'>HTTP Request</h3>
 <p>You can create a new payment order by this endpoint.
 Then you will retrieve a <code>wexin://xxx</code> deeplink for your customer to pay their order by redirection.</p>
@@ -356,6 +373,7 @@ Then you will retrieve a <code>wexin://xxx</code> deeplink for your customer to 
 <th>Description</th>
 <th>Type</th>
 <th>Options</th>
+<th>Required</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -363,42 +381,42 @@ Then you will retrieve a <code>wexin://xxx</code> deeplink for your customer to 
 <td>Order number, must be unique</td>
 <td>integer</td>
 <td>-</td>
+<td>Required</td>
 </tr>
 <tr>
 <td>body</td>
 <td>Your order description, will show on the payment page</td>
 <td>string</td>
 <td>-</td>
-</tr>
-<tr>
-<td>fee_type</td>
-<td>3-letter ISO code for currency</td>
-<td>string</td>
-<td>HKD</td>
+<td>Required</td>
 </tr>
 <tr>
 <td>total_fee</td>
-<td>A fee in <em>cents</em></td>
+<td>A fee in <em>cents</em> <em>(USD)</em></td>
 <td>int</td>
 <td>-</td>
+<td>Required</td>
 </tr>
 <tr>
 <td>open_id</td>
 <td>Payment user openid, need to linked with the official account</td>
 <td>string</td>
 <td>-</td>
+<td>Required when trade_type is JSAPI</td>
 </tr>
 <tr>
 <td>trade_type</td>
 <td>Order intergration method</td>
 <td>string</td>
-<td>NATIVE</td>
+<td>NATIVE, JSAPI</td>
+<td>Required</td>
 </tr>
 <tr>
 <td>notify_url</td>
 <td>Notify URL for forwarding the XML response from wechat</td>
 <td>string</td>
 <td>-</td>
+<td>Optional</td>
 </tr>
 </tbody></table>
 <h2 id='check-payment-status'>Check Payment Status</h2>
@@ -460,6 +478,7 @@ Then you will retrieve a <code>wexin://xxx</code> deeplink for your customer to 
 <th>Description</th>
 <th>Type</th>
 <th>Options</th>
+<th>Required</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -467,8 +486,88 @@ Then you will retrieve a <code>wexin://xxx</code> deeplink for your customer to 
 <td>Order number</td>
 <td>integer</td>
 <td>-</td>
+<td>Required</td>
 </tr>
 </tbody></table>
+
+<!--Check Sign-->
+<h2 id='check-callback-sign'>Check CallBack Sign</h2>
+<p><span class="badge orange">SECRET</span></p>
+<pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.pay.wemine.net/v1/checksign'</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="p">"</span>
+  &lt;xml&gt;
+   &lt;appid&gt;&lt;![CDATA[wx2421b1c4370ec43b]]&gt;&lt;/appid&gt;
+   &lt;attach&gt;&lt;![CDATA[支付测试]]&gt;&lt;/attach&gt;
+   &lt;bank_type&gt;&lt;![CDATA[CFT]]&gt;&lt;/bank_type&gt;
+   &lt;fee_type&gt;&lt;![CDATA[CNY]]&gt;&lt;/fee_type&gt;
+   &lt;is_subscribe&gt;&lt;![CDATA[Y]]&gt;&lt;/is_subscribe&gt;
+   &lt;mch_id&gt;&lt;![CDATA[10000100]]&gt;&lt;/mch_id&gt;
+   &lt;nonce_str&gt;&lt;![CDATA[5d2b6c2a8db53831f7eda20af46e531c]]&gt;&lt;/nonce_str&gt;
+   &lt;openid&gt;&lt;![CDATA[oUpF8uMEb4qRXf22hE3X68TekukE]]&gt;&lt;/openid&gt;
+   &lt;out_trade_no&gt;&lt;![CDATA[1409811653]]&gt;&lt;/out_trade_no&gt;
+   &lt;result_code&gt;&lt;![CDATA[SUCCESS]]&gt;&lt;/result_code&gt;
+   &lt;return_code&gt;&lt;![CDATA[SUCCESS]]&gt;&lt;/return_code&gt;
+   &lt;sign&gt;&lt;![CDATA[B552ED6B279343CB493C5DD0D78AB241]]&gt;&lt;/sign&gt;
+   &lt;sub_mch_id&gt;&lt;![CDATA[10000100]]&gt;&lt;/sub_mch_id&gt;
+   &lt;time_end&gt;&lt;![CDATA[20140903131540]]&gt;&lt;/time_end&gt;
+   &lt;total_fee&gt;1&lt;/total_fee&gt;
+   &lt;trade_type&gt;&lt;![CDATA[JSAPI]]&gt;&lt;/trade_type&gt;
+   &lt;transaction_id&gt;&lt;![CDATA[1004400740201409030005092168]]&gt;&lt;/transaction_id&gt;
+&lt;/xml&gt;
+  <span class="p">",</span>
+  <span class="na">headers</span><span class="p">:</span>
+   <span class="p">{</span>
+     <span class="s1">'Cache-Control'</span><span class="p">:</span> <span class="s1">'no-cache'</span><span class="p">,</span>
+     <span class="s1">'api-key'</span><span class="p">:</span> <span class="s1">'YOUR_API_KEY'</span><span class="p">,</span>
+     <span class="s1">'api-secret'</span><span class="p">:</span> <span class="s1">'YOU_API_SECRET'</span>
+     <span class="s1">'Content-Type'</span><span class="p">:</span> <span class="s1">'application/xml'</span>
+   <span class="p">}</span>
+  <span class="nl">xml</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"sign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A1E38D5C4BF8A43FA8E57F2CB4284C9F"</span><span class="p">,</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-2'>HTTP Request</h3>
+<p>You can check you order status by passing the our_trade_no.</p>
+
+<p><code>[POST] /checksign</code></p>
+<h3 id='qs-query-string'><span class="remark">Body</span> Body String</h3>
+<table><thead>
+<tr>
+<th>Content</th>
+<th>Description</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>The XML response you received from the notify url</td>
+<td>After successful payment, WeMine Pay will send a request to the notify url defined, you need call this api to check if the sign is correct</td>
+<td>application/xml</td>
+<td>Required</td>
+</tr>
+</tbody></table>
+<!--Check Sign-->
+<!--Refund Payment-->
+
+<!--Refund Payment-->
 
       </div>
       <div class="dark-box">
