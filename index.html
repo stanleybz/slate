@@ -247,6 +247,9 @@
                   <li>
                     <a href="#check-callback-sign" class="toc-h2 toc-link" data-title="check-callback-sign">Check Callback Sign</a>
                   </li>
+                  <li>
+                    <a href="#request-refund" class="toc-h2 toc-link" data-title="request-refund">Request Refund</a>
+                  </li>
               </ul>
           </li>
       </div>
@@ -557,6 +560,84 @@ Then you will retrieve a <code>wexin://xxx</code> deeplink for your customer to 
 <td>XML body from the callback URL</td>
 <td>To check if the callback body has correct XML</td>
 <td>application/xml</td>
+<td>Required</td>
+</tr>
+</tbody></table>
+<h2 id='request-refund'>Request Refund</h2>
+<p><span class="badge">BASIC</span></p>
+<pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.pay.wemine.net/v1/refund'</span><span class="p">,</span>
+  <span class="na">qs</span><span class="p">:</span> <span class="p">{</span> <span class="na">out_trade_no</span><span class="p">:</span> <span class="s1">'9900000000'</span><span class="p">,</span> <span class="s1">'total_fee'</span><span class="p">:</span><span class="s1">'1'</span><span class="p">,</span> <span class="s1">'refund_fee'</span><span class="p">:</span><span class="s1">'1'</span> <span class="p">},</span>
+  <span class="na">headers</span><span class="p">:</span>
+   <span class="p">{</span>
+     <span class="s1">'Cache-Control'</span><span class="p">:</span> <span class="s1">'no-cache'</span><span class="p">,</span>
+     <span class="s1">'api-key'</span><span class="p">:</span> <span class="s1">'YOUR_API_KEY'</span><span class="p">,</span>
+     <span class="s1">'Content-Type'</span><span class="p">:</span> <span class="s1">'application/json'</span>
+   <span class="p">}</span>
+  <span class="nl">xml</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"Code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FAIL"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"return_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"return_msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"appid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wxc944c7908b4fdd86"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mch_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1486528272"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"sub_mch_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1491094072"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"nonce_str"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AN774wB0KB3IRN5Y"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"sign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19BCC434A48088A9A1C538BE827E4732"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"result_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FAIL"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"err_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ERROR"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"err_code_des"</span><span class="p">:</span><span class="w"> </span><span class="s2">"订单已全额退款"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"data"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-4'>HTTP Request</h3>
+<p>You can send a refund request to refund</p>
+
+<p><code>[POST] /refund</code></p>
+<h3 id='body-body-string-2'><span class="remark">Body</span> Body String</h3>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+<th>Type</th>
+<th>Options</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>out_trade_no</td>
+<td>Order number, must be unique</td>
+<td>integer</td>
+<td>-</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>total_fee</td>
+<td>A fee in <em>cents</em></td>
+<td>int</td>
+<td>-</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>refund_fee</td>
+<td>Refund fee in <em>cents</em></td>
+<td>int</td>
+<td>-</td>
 <td>Required</td>
 </tr>
 </tbody></table>
