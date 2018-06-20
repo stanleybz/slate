@@ -289,3 +289,65 @@ You can check you callback from notify_url if the sign is correct.
 | Content | Description | Type | Required |
 |----|----|----|----|----|
 | XML body from the callback URL | To check if the callback body has correct XML | application/xml | Required |
+
+## Request Refund
+
+<span class="badge">BASIC</span>
+
+```javascript
+var request = require("request");
+
+var options = {
+  method: 'POST',
+  url: 'https://api.pay.wemine.net/v1/refund',
+  qs: { out_trade_no: '9900000000', 'total_fee':'1', 'refund_fee':'1' },
+  headers:
+   {
+     'Cache-Control': 'no-cache',
+     'api-key': 'YOUR_API_KEY',
+     'Content-Type': 'application/json'
+   }
+  xml: true
+};
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+  console.log(body);
+});
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "Code": "FAIL",
+    "message": {
+        "return_code": "SUCCESS",
+        "return_msg": "OK",
+        "appid": "wxc944c7908b4fdd86",
+        "mch_id": "1486528272",
+        "sub_mch_id": "1491094072",
+        "nonce_str": "AN774wB0KB3IRN5Y",
+        "sign": "19BCC434A48088A9A1C538BE827E4732",
+        "result_code": "FAIL",
+        "err_code": "ERROR",
+        "err_code_des": "订单已全额退款"
+    },
+    "data": null
+}
+```
+
+### HTTP Request
+
+You can send a refund request to refund
+
+`[POST] /refund`
+
+### <span class="remark">Body</span> Body String
+
+| Key | Description | Type | Options | Required |
+|----|----|----|----|----|
+| out_trade_no | Order number, must be unique | integer | - | Required |
+| total_fee | A fee in *cents* | int | - | Required |
+| refund_fee | Refund fee in *cents* | int | - | Required |
