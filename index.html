@@ -273,8 +273,8 @@
 
 <span class="nx">request</span><span class="p">({</span>
   <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">'api-key'</span><span class="p">:</span> <span class="s1">'live_ly83rGP2Bo'</span><span class="p">,</span>
-    <span class="s1">'api-secret'</span><span class="p">:</span> <span class="s1">'tB2d71cDz4g1MjQlczdkxN2lLKO8BwlnJrsVh3O3'</span>
+    <span class="s1">'api-key'</span><span class="p">:</span> <span class="s1">'{API Key}'</span><span class="p">,</span>
+    <span class="s1">'api-secret'</span><span class="p">:</span> <span class="s1">'{API Secret}'</span>
   <span class="p">}</span>
 <span class="p">})</span>
 </code></pre>
@@ -283,7 +283,7 @@
 <p>Please follow the badge under the endpoint to submit the correct credentials.</p>
 
 <p><span class="badge">BASIC</span> Just api-key
-Just <code>api-key: live_ly83rGP2Bo</code></p>
+Just <code>api-key: {API Key}</code></p>
 
 <p><span class="badge orange">SECRET</span> api-key with api-secret</p>
 
@@ -355,7 +355,7 @@ Remember not to show any of you credentials on publicly accessible areas such cl
         </span><span class="s2">"prepay_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wx241454271591128cfc753dab0139979466"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"out_trade_no"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9900000000"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"jsapi"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"appId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wx25d3f820547bcb2b"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"appId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wxa123b4567c8def90"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"timeStamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1527135717</span><span class="p">,</span><span class="w">
           </span><span class="s2">"nonceStr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Yyj389AvflUTLi8vcSb04uUzVbFjINnw"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"package"</span><span class="p">:</span><span class="w"> </span><span class="s2">"prepay_id=wx241221577529528cfc753dab1804175993"</span><span class="p">,</span><span class="w">
@@ -500,19 +500,19 @@ Then you will retrieve a <code>wexin://xxx</code> deeplink for your customer to 
   <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
   <span class="na">url</span><span class="p">:</span> <span class="s1">'https://api.pay.wemine.net/v1/checksign'</span><span class="p">,</span>
   <span class="na">body</span><span class="p">:</span> <span class="s1">'&lt;xml&gt;
-   &lt;appid&gt;&lt;![CDATA[wx2421b1c4370ec43b]]&gt;&lt;/appid&gt;
+   &lt;appid&gt;&lt;![CDATA[wxa123b4567c8def90]]&gt;&lt;/appid&gt;
    &lt;attach&gt;&lt;![CDATA[支付测试]]&gt;&lt;/attach&gt;
    &lt;bank_type&gt;&lt;![CDATA[CFT]]&gt;&lt;/bank_type&gt;
    &lt;fee_type&gt;&lt;![CDATA[CNY]]&gt;&lt;/fee_type&gt;
    &lt;is_subscribe&gt;&lt;![CDATA[Y]]&gt;&lt;/is_subscribe&gt;
-   &lt;mch_id&gt;&lt;![CDATA[10000100]]&gt;&lt;/mch_id&gt;
+   &lt;mch_id&gt;&lt;![CDATA[1234567890]]&gt;&lt;/mch_id&gt;
    &lt;nonce_str&gt;&lt;![CDATA[5d2b6c2a8db53831f7eda20af46e531c]]&gt;&lt;/nonce_str&gt;
    &lt;openid&gt;&lt;![CDATA[oUpF8uMEb4qRXf22hE3X68TekukE]]&gt;&lt;/openid&gt;
    &lt;out_trade_no&gt;&lt;![CDATA[1409811653]]&gt;&lt;/out_trade_no&gt;
    &lt;result_code&gt;&lt;![CDATA[SUCCESS]]&gt;&lt;/result_code&gt;
    &lt;return_code&gt;&lt;![CDATA[SUCCESS]]&gt;&lt;/return_code&gt;
    &lt;sign&gt;&lt;![CDATA[B552ED6B279343CB493C5DD0D78AB241]]&gt;&lt;/sign&gt;
-   &lt;sub_mch_id&gt;&lt;![CDATA[10000100]]&gt;&lt;/sub_mch_id&gt;
+   &lt;sub_mch_id&gt;&lt;![CDATA[1357924680]]&gt;&lt;/sub_mch_id&gt;
    &lt;time_end&gt;&lt;![CDATA[20140903131540]]&gt;&lt;/time_end&gt;
    &lt;total_fee&gt;1&lt;/total_fee&gt;
    &lt;trade_type&gt;&lt;![CDATA[JSAPI]]&gt;&lt;/trade_type&gt;
@@ -594,9 +594,9 @@ Then you will retrieve a <code>wexin://xxx</code> deeplink for your customer to 
     </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="s2">"return_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SUCCESS"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"return_msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"appid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wxc944c7908b4fdd86"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"mch_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1486528272"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"sub_mch_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1491094072"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"appid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wxa123b4567c8def90"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mch_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"sub_mch_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1357924680"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"nonce_str"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AN774wB0KB3IRN5Y"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"sign"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19BCC434A48088A9A1C538BE827E4732"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"result_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FAIL"</span><span class="p">,</span><span class="w">
