@@ -32,8 +32,8 @@ var request = require("request");
 
 request({
   headers: {
-    'api-key': 'live_ly83rGP2Bo',
-    'api-secret': 'tB2d71cDz4g1MjQlczdkxN2lLKO8BwlnJrsVh3O3'
+    'api-key': '{API Key}',
+    'api-secret': '{API Secret}'
   }
 })
 ```
@@ -43,7 +43,7 @@ To identify you account when using the API you should including your API key in 
 Please follow the badge under the endpoint to submit the correct credentials.
 
 <span class="badge">BASIC</span> Just api-key
-Just `api-key: live_ly83rGP2Bo`
+Just `api-key: {API Key}`
 
 <span class="badge orange">SECRET</span> api-key with api-secret
 
@@ -126,7 +126,7 @@ request(options, function (error, response, body) {
         "prepay_id": "wx241454271591128cfc753dab0139979466",
         "out_trade_no": "9900000000",
         "jsapi": {
-          "appId": "wx25d3f820547bcb2b",
+          "appId": "wxa123b4567c8def90",
           "timeStamp": 1527135717,
           "nonceStr": "Yyj389AvflUTLi8vcSb04uUzVbFjINnw",
           "package": "prepay_id=wx241221577529528cfc753dab1804175993",
@@ -232,19 +232,19 @@ var options = {
   method: 'POST',
   url: 'https://api.pay.wemine.net/v1/checksign',
   body: '<xml>
-   <appid><![CDATA[wx2421b1c4370ec43b]]></appid>
+   <appid><![CDATA[wxa123b4567c8def90]]></appid>
    <attach><![CDATA[支付测试]]></attach>
    <bank_type><![CDATA[CFT]]></bank_type>
    <fee_type><![CDATA[CNY]]></fee_type>
    <is_subscribe><![CDATA[Y]]></is_subscribe>
-   <mch_id><![CDATA[10000100]]></mch_id>
+   <mch_id><![CDATA[1234567890]]></mch_id>
    <nonce_str><![CDATA[5d2b6c2a8db53831f7eda20af46e531c]]></nonce_str>
    <openid><![CDATA[oUpF8uMEb4qRXf22hE3X68TekukE]]></openid>
    <out_trade_no><![CDATA[1409811653]]></out_trade_no>
    <result_code><![CDATA[SUCCESS]]></result_code>
    <return_code><![CDATA[SUCCESS]]></return_code>
    <sign><![CDATA[B552ED6B279343CB493C5DD0D78AB241]]></sign>
-   <sub_mch_id><![CDATA[10000100]]></sub_mch_id>
+   <sub_mch_id><![CDATA[1357924680]]></sub_mch_id>
    <time_end><![CDATA[20140903131540]]></time_end>
    <total_fee>1</total_fee>
    <trade_type><![CDATA[JSAPI]]></trade_type>
@@ -325,9 +325,9 @@ request(options, function (error, response, body) {
     "message": {
         "return_code": "SUCCESS",
         "return_msg": "OK",
-        "appid": "wxc944c7908b4fdd86",
-        "mch_id": "1486528272",
-        "sub_mch_id": "1491094072",
+        "appid": "wxa123b4567c8def90",
+        "mch_id": "1234567890",
+        "sub_mch_id": "1357924680",
         "nonce_str": "AN774wB0KB3IRN5Y",
         "sign": "19BCC434A48088A9A1C538BE827E4732",
         "result_code": "FAIL",
